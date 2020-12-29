@@ -3,7 +3,9 @@ var db;
 
 const sqlLiteManager = {
   connect: () => {
-    db = new sqlite3.Database("drawDB.db", (err) => {
+    db = new sqlite3.Database("drawDB.db",
+    
+     (err) => {
       if (err) {
         return console.error(err.message);
       }
@@ -27,7 +29,18 @@ const sqlLiteManager = {
   },
 
   //TODO
-  insert: () => {},
+  insert: (user,pass) => {
+
+    db.run('INSERT INTO users(name, age) VALUES(?, ?)', [user,pass], (err) => {
+      if(err) {
+        return console.log(err.message); 
+      }
+      console.log('Row was added to the table: ${this.lastID}');
+    })
+  
+    // close the database connection
+    db.close();
+  },
 
   update: () => {
     //TODO
@@ -41,6 +54,10 @@ const sqlLiteManager = {
       }
       console.log(`Row(s) updated: ${this.changes}`);
     });
+  },
+
+  create: () => {
+    db.run('CREATE TABLE users(group_id INTEGER PRIMARY KEY, name text)');
   },
 
   delete: () => {

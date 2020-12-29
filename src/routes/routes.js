@@ -8,7 +8,8 @@ router.use((req, res, next) => {
 })
 
 router.get('/sample', services.sample)
-router.get('/authentication', services.authentication)
+router.post('/authentication', services.authentication) //login
+router.post('/signup', services.signup) //signup
 router.get('/getDraws', services.getDraws)
 
 module.exports = router;
