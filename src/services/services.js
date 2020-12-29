@@ -4,15 +4,19 @@ const sqlLiteManager = require("../models/sqlLiteManager");
 const publicMethods = {
   sample: (req, res) => {
     sqlLiteManager.connect();
+    sqlLiteManager.read();
     res.json({ message: "hello" });
   },
 
   authentication: (req, res) => {
     sqlLiteManager.connect();
-    let username = req.body.username;
-    let password = req.body.password;
-    if(username && password){
-      sqlLiteManager.insert(username,password);
+    let userId = req.body.userId;
+    let fullName = req.body.fullName;
+    let email = req.body.email;
+    let userName = req.body.userName;
+    let relationChild = req.body.relationChild;
+    if(userId && fullName && email && userName && relationChild){
+      sqlLiteManager.insert(userId, fullName, email, userName, relationChild);
 
     }
   },

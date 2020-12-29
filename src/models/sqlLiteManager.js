@@ -3,39 +3,36 @@ var db;
 
 const sqlLiteManager = {
   connect: () => {
-    db = new sqlite3.Database("drawDB.db",
+    db = new sqlite3.Database("newDB/drawsdb.db",
     
      (err) => {
       if (err) {
         return console.error(err.message);
       }
-      console.log("Connected to the in-memory SQlite database.");
+      console.log("Connected to SQlite database.");
     });
   },
 
   //TODO
   read: () => {
-    let sql = `SELECT DISTINCT Name name FROM playlists
-           ORDER BY name`;
-
+    let sql = `SELECT * FROM users`;
     db.all(sql, [], (err, rows) => {
       if (err) {
         throw err;
       }
       rows.forEach((row) => {
-        console.log(row.name);
+        console.log(JSON.stringify(row));
       });
     });
   },
 
   //TODO
-  insert: (user,pass) => {
-
-    db.run('INSERT INTO users(name, age) VALUES(?, ?)', [user,pass], (err) => {
+  insert: (userId, fullName, email, userName, relationChild) => {
+    db.run('INSERT INTO users(user_id, full_name, email, user_name, relation_child) VALUES(?, ?, ?, ?, ?)', [userId, fullName, email, userName, relationChild], (err) => {
       if(err) {
         return console.log(err.message); 
       }
-      console.log('Row was added to the table: ${this.lastID}');
+      console.log(`Row was added to the table with userId: ${userId}`);
     })
   
     // close the database connection
