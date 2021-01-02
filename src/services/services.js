@@ -8,31 +8,71 @@ const publicMethods = {
     res.json({ message: "hello" });
   },
 
-  authentication: (req, res) => {
+  signup: (req, res) => {
     sqlLiteManager.connect();
     let userId = req.body.userId;
     let fullName = req.body.fullName;
     let email = req.body.email;
     let userName = req.body.userName;
     let relationChild = req.body.relationChild;
-    if(userId && fullName && email && userName && relationChild){
-      sqlLiteManager.insert(userId, fullName, email, userName, relationChild);
-
+    let password = req.body.userPassword;
+    if (userId && fullName && email && userName && relationChild && password) {
+      sqlLiteManager.insert(
+        userId,
+        fullName,
+        email,
+        userName,
+        relationChild,
+        password
+      );
     }
   },
 
-  signup: (req, res) => {
+  login: (req, res) => {
     sqlLiteManager.connect();
-    let fullname = req.body.fullname;
-    let username = req.body.username;
-    let email = req.body.email;
-    let password = req.body.password;
-    let validpassword = req.body.validpassword;
-    let relation = req.body.relation
-    if(username && password && validpassword && fullname && email && relation){
-
+    let username = req.body.userName;
+    let password = req.body.userPassword;
+    if (username && password) {
+      let auth = sqlLiteManager.auth(username, password);
+      if (auth) {
+        res.json({ message: "succedd login" });
+      } else {
+        res.json({ message: "user name or password isn't correct" });
+      }
     }
   },
+  upload: (req, res) => {
+    sqlLiteManager.connect();
+    let drawId = req.body.drawId;
+    let userId = req.body.userId;
+    let filePath = req.body.filePath;
+    let bbResult = req.body.bbResult;
+    let dateOfBirth = req.body.dateOfBirth;
+    let gender = req.body.gender;
+    let fullNameOfChild = req.body.fullNameOfChild;
+    let dateUpload = req.body.dateUpload;
+    if (
+      userId &&
+      drawId &&
+      filePath &&
+      bbResult &&
+      dateOfBirth &&
+      gender &&
+      fullNameOfChild &&
+      dateUpload
+    ) {
+      sqlLiteManager.upload(
+        userId,
+        drawId,
+        filePath,
+        bbResult,
+        dateOfBirth,
+        gender,
+        fullNameOfChild
+      );
+    }
+  },
+
   getDraws: (req, res) => {
     res.json({ message: "hello" });
   },
