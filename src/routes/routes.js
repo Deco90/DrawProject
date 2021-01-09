@@ -8,9 +8,9 @@ router.use((req, res, next) => {
 });
 
 router.get("/sample", services.sample);
-router.post("/login", services.login); //login
-router.post("/signup", services.signup); //signup
-router.post("/upload", services.upload); //upload
+router.post("/login", services.login);
+router.post("/signup", services.signup);
+router.post("/upload", services.upload);
 router.get("/getDraws", services.getDraws);
 
 module.exports = router;

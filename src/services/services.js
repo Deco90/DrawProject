@@ -28,12 +28,12 @@ const publicMethods = {
     }
   },
 
-  login: (req, res) => {
+  login: async (req, res) => {
     sqlLiteManager.connect();
     let username = req.body.userName;
     let password = req.body.userPassword;
     if (username && password) {
-      let auth = sqlLiteManager.auth(username, password);
+      let auth = await sqlLiteManager.auth(username, password);
       if (auth) {
         res.json({ message: "succedd login" });
       } else {

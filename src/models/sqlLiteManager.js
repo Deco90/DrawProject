@@ -15,20 +15,14 @@ const sqlLiteManager = {
     );
   },
 
-  auth: (username, password) => {
-    let sql = `SELECT *
+  auth: async (username, password) => {
+    let query = `SELECT *
     FROM users 
-    WHERE user_name = "${username}" AND user_password = "${password}")`;
+    WHERE user_name = "${username}"  AND user_password = "${password}"`;
 
-    /*let sql = `SELECT *
-     FROM users 
-     WHERE 
-     EXISTS (
-      SELECT * FROM users WHERE user_name = ? AND user_password = ?)`;
-    //SELECT * FROM users WHERE user_name = ״${username}״ AND user_password = ״${password}״)`;
-*/
-    db.all(sql, [], (err, row) => {
+    db.all(query, function (err, row) {
       if (err) {
+        console.log(err);
         throw err;
       } else if (row) {
         console.log(JSON.stringify(row));
@@ -42,6 +36,22 @@ const sqlLiteManager = {
         return;
       }
     });
+
+    /*db.all(sql, [], (err, row) => {
+      if (err) {
+        throw err;
+      } else if (row) {
+        console.log(JSON.stringify(row));
+        rows.forEach((row) => {
+          console.log(JSON.stringify(row));
+        });
+        return true;
+      } else if (!row) {
+        res.status(400);
+        res.send("Invalid username or password");
+        return;
+      }
+    });*/
   },
 
   //TODO
