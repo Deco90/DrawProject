@@ -9,27 +9,17 @@ const publicMethods = {
   },
 
   signup: (req, res) => {
-    sqlLiteManager.connect();
-    let userId = req.body.userId;
     let fullName = req.body.fullName;
     let email = req.body.email;
     let userName = req.body.userName;
     let relationChild = req.body.relationChild;
     let password = req.body.userPassword;
-    if (userId && fullName && email && userName && relationChild && password) {
-      sqlLiteManager.insert(
-        userId,
-        fullName,
-        email,
-        userName,
-        relationChild,
-        password
-      );
+    if (fullName && email && userName && relationChild && password) {
+      sqlLiteManager.insert(fullName, email, userName, relationChild, password);
     }
   },
 
   login: async (req, res) => {
-    sqlLiteManager.connect();
     let username = req.body.userName;
     let password = req.body.userPassword;
     if (username && password) {
@@ -44,7 +34,7 @@ const publicMethods = {
   upload: (req, res) => {
     sqlLiteManager.connect();
     let drawId = req.body.drawId;
-    let userId = req.body.userId;
+    let userId = req.body.userId; //check about pass from localstorage - do after login
     let filePath = req.body.filePath;
     let bbResult = req.body.bbResult;
     let dateOfBirth = req.body.dateOfBirth;

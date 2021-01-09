@@ -57,15 +57,15 @@ const sqlLiteManager = {
   },
 
   //TODO
-  insert: (userId, fullName, email, userName, relationChild, password) => {
+  insert: (fullName, email, userName, relationChild, password) => {
     db.run(
-      "INSERT INTO users(user_id, full_name, email, user_name, relation_child,user_password) VALUES(?, ?, ?, ?, ?,?)",
-      [userId, fullName, email, userName, relationChild, password],
+      "INSERT INTO users(full_name, email, user_name, relation_child,user_password) VALUES( ?, ?, ?, ?,?)",
+      [fullName, email, userName, relationChild, password],
       (err) => {
         if (err) {
           return console.log(err.message);
         }
-        console.log(`Row was added to the table with userId: ${userId}`);
+        console.log(`Row was added to the table with userName: ${userName}`);
       }
     );
 
