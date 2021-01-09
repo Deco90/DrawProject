@@ -12,10 +12,10 @@ const publicMethods = {
     let fullName = req.body.fullName;
     let email = req.body.email;
     let userName = req.body.userName;
-    let relationChild = req.body.relationChild;
+    let userGender = req.body.userGender;
     let password = req.body.userPassword;
-    if (fullName && email && userName && relationChild && password) {
-      sqlLiteManager.insert(fullName, email, userName, relationChild, password);
+    if (fullName && email && userName && userGender && password) {
+      sqlLiteManager.insert(fullName, email, userName, userGender, password);
     }
   },
 

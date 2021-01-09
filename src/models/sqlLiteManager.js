@@ -57,10 +57,10 @@ const sqlLiteManager = {
   },
 
   //TODO
-  insert: (fullName, email, userName, relationChild, password) => {
+  insert: (fullName, email, userName, userGender, password) => {
     db.run(
-      "INSERT INTO users(full_name, email, user_name, relation_child,user_password) VALUES( ?, ?, ?, ?,?)",
-      [fullName, email, userName, relationChild, password],
+      "INSERT INTO users(full_name, email, user_name, user_gender,user_password) VALUES( ?, ?, ?, ?,?)",
+      [fullName, email, userName, userGender, password],
       (err) => {
         if (err) {
           return console.log(err.message);
