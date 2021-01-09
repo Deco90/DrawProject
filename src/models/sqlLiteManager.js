@@ -19,39 +19,28 @@ const sqlLiteManager = {
     let query = `SELECT *
     FROM users 
     WHERE user_name = "${username}"  AND user_password = "${password}"`;
+    try {
+      const promiseResult = await sqlLiteManager.dbAllPromise(query);
+      return promiseResult;
+    } catch (error) {
+      console.log(error);
+    }
+  },
 
-    db.all(query, function (err, row) {
-      if (err) {
-        console.log(err);
-        throw err;
-      } else if (row) {
-        console.log(JSON.stringify(row));
-        rows.forEach((row) => {
-          console.log(JSON.stringify(row));
-        });
-        return true;
-      } else if (!row) {
-        res.status(400);
-        res.send("Invalid username or password");
-        return;
-      }
+  dbAllPromise: (query) => {
+    return new Promise((resolve, reject) => {
+      db.all(query, (err, rows) => {
+        if (err) {
+          reject(err);
+        } else if (rows) {
+          let isTrue = false;
+          if (rows.length) {
+            isTrue = true;
+          }
+          resolve(isTrue);
+        }
+      });
     });
-
-    /*db.all(sql, [], (err, row) => {
-      if (err) {
-        throw err;
-      } else if (row) {
-        console.log(JSON.stringify(row));
-        rows.forEach((row) => {
-          console.log(JSON.stringify(row));
-        });
-        return true;
-      } else if (!row) {
-        res.status(400);
-        res.send("Invalid username or password");
-        return;
-      }
-    });*/
   },
 
   //TODO
