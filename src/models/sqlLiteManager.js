@@ -1,18 +1,16 @@
 const sqlite3 = require("sqlite3").verbose();
-var db;
-
+const path = require("path");
+const dbPath = path.resolve(__dirname, "../../newDB/drawsdb.db");
+let db;
 const sqlLiteManager = {
   connect: () => {
-    db = new sqlite3.Database(
-      "newDB/drawsdb.db",
-
-      (err) => {
-        if (err) {
-          return console.error(err.message);
-        }
-        console.log("Connected to SQlite database.");
+    // db = new sqlite3.Database(
+    db = new sqlite3.Database(dbPath, (err) => {
+      if (err) {
+        return console.error(err.message);
       }
-    );
+      console.log("Connected to SQlite database.");
+    });
   },
 
   auth: async (username, password) => {
