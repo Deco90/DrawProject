@@ -16,6 +16,7 @@ const publicMethods = {
     let password = req.body.userPassword;
     if (fullName && email && userName && userGender && password) {
       sqlLiteManager.insert(fullName, email, userName, userGender, password);
+      res.json({ message: "succedd signup" });
     }
   },
 
@@ -31,6 +32,7 @@ const publicMethods = {
       }
     }
   },
+
   upload: (req, res) => {
     sqlLiteManager.connect();
     let drawId = req.body.drawId;
