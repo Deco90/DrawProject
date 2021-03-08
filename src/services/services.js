@@ -26,7 +26,7 @@ const publicMethods = {
     if (username && password) {
       let auth = await sqlLiteManager.auth(username, password);
       if (auth) {
-        res.json({ message: "succedd login" });
+        res.json(auth);
       } else {
         res.json({ message: "user name or password isn't correct" });
       }

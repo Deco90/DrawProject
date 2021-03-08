@@ -22,21 +22,17 @@ const sqlLiteManager = {
       return promiseResult;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   },
 
-  dbAllPromise: (query) => {
+  dbAllPromise: async (query) => {
     return new Promise((resolve, reject) => {
       db.all(query, (err, rows) => {
-        if (err) {
+        if (err && err !== null) {
           reject(err);
-        } else if (rows) {
-          let isTrue = false;
-          if (rows.length) {
-            isTrue = true;
-          }
-          resolve(isTrue);
         }
+        resolve(rows);
       });
     });
   },
