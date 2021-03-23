@@ -67,7 +67,7 @@ const sqlLiteManager = {
     db.close();
   },
 
-  upload: (
+  upload: async (
     drawId,
     userId,
     filePath,

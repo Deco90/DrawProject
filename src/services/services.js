@@ -34,34 +34,28 @@ const publicMethods = {
   },
 
   upload: (req, res) => {
-    sqlLiteManager.connect();
-    let drawId = req.body.drawId;
-    let userId = req.body.userId; //check about pass from localstorage - do after login
+    let userId = req.body.userid; //check about pass from localstorage - do after login
     let filePath = req.body.filePath;
     let bbResult = req.body.bbResult;
     let dateOfBirth = req.body.dateOfBirth;
     let gender = req.body.gender;
     let fullNameOfChild = req.body.fullNameOfChild;
     let dateUpload = req.body.dateUpload;
-    if (
-      userId &&
-      drawId &&
-      filePath &&
-      bbResult &&
-      dateOfBirth &&
-      gender &&
-      fullNameOfChild &&
-      dateUpload
-    ) {
-      sqlLiteManager.upload(
-        userId,
-        drawId,
-        filePath,
-        bbResult,
-        dateOfBirth,
-        gender,
-        fullNameOfChild
-      );
+    if (userId && filePath && dateUpload) {
+      console.log("check");
+      res.json({ message: "hello" });
+
+      // res.json({ message: "ready upload" });
+
+      // let getMedia = await sqlLiteManager.upload(
+      //   userId,
+      //   drawId,
+      //   filePath,
+      //   bbResult,
+      //   dateOfBirth,
+      //   gender,
+      //   fullNameOfChild
+      // );
     }
   },
 
