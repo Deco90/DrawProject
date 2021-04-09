@@ -68,7 +68,6 @@ const sqlLiteManager = {
   },
 
   upload: async (
-    drawId,
     userId,
     filePath,
     bbResult,
@@ -78,9 +77,8 @@ const sqlLiteManager = {
     dateUpload
   ) => {
     db.run(
-      "INSERT INTO users(user_id, full_name, email, user_name, relation_child,user_password) VALUES(?, ?, ?, ?, ?,?)",
+      "INSERT INTO draws(user_id, file_path, bb, data_of_birth, gender, full_name_of_child, data_upload) VALUES(?, ?, ?, ?, ?,?,?)",
       [
-        drawId,
         userId,
         filePath,
         bbResult,

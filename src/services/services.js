@@ -33,8 +33,8 @@ const publicMethods = {
     }
   },
 
-  upload: (req, res) => {
-    let userId = req.body.userid; //check about pass from localstorage - do after login
+  upload: async (req, res) => {
+    let userId = req.body.userid;
     let filePath = req.body.filePath;
     let bbResult = req.body.bbResult;
     let dateOfBirth = req.body.dateOfBirth;
@@ -42,20 +42,17 @@ const publicMethods = {
     let fullNameOfChild = req.body.fullNameOfChild;
     let dateUpload = req.body.dateUpload;
     if (userId && filePath && dateUpload) {
-      console.log("check");
-      res.json({ message: "hello" });
-
-      // res.json({ message: "ready upload" });
-
-      // let getMedia = await sqlLiteManager.upload(
-      //   userId,
-      //   drawId,
-      //   filePath,
-      //   bbResult,
-      //   dateOfBirth,
-      //   gender,
-      //   fullNameOfChild
-      // );
+      let getMedia = await sqlLiteManager.upload(
+        userId,
+        filePath,
+        bbResult,
+        dateOfBirth,
+        gender,
+        fullNameOfChild,
+        dateUpload
+      );
+      console.log(getMedia);
+      res.json({ message: "The Draw was upload" });
     }
   },
 
