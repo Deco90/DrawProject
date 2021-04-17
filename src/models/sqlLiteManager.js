@@ -38,16 +38,23 @@ const sqlLiteManager = {
   },
 
   //TODO
-  read: (userId, password) => {
-    let sql = `SELECT * FROM users WHERE userId==`;
-    db.all(sql, [], (err, rows) => {
-      if (err) {
-        throw err;
-      }
-      rows.forEach((row) => {
-        console.log(JSON.stringify(row));
-      });
-    });
+  read: async (userId) => {
+    let query = `SELECT * FROM draws WHERE user_id=="${userId}"`;
+    try {
+      const promiseResult = await sqlLiteManager.dbAllPromise(query);
+      return promiseResult;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+    // db.all(sql, [], (err, rows) => {
+    //   if (err) {
+    //     throw err;
+    //   }
+    //   rows.forEach((row) => {
+    //     console.log(JSON.stringify(row));
+    //   });
+    // });
   },
 
   //TODO

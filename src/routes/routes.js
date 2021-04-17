@@ -11,6 +11,6 @@ router.get("/sample", services.sample);
 router.post("/login", services.login);
 router.post("/signup", services.signup);
 router.post("/upload", services.upload);
-router.get("/getDraws", services.getDraws);
+router.post("/history", services.history);
 
 module.exports = router;

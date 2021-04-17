@@ -56,8 +56,17 @@ const publicMethods = {
     }
   },
 
-  getDraws: (req, res) => {
-    res.json({ message: "hello" });
+  history: async (req, res) => {
+    if (req) {
+      let userId = req.body.userId;
+      console.log(userId);
+      if (userId) {
+        let getData = await sqlLiteManager.read(userId);
+        res.json(getData);
+      }
+    } else {
+      res.json({ message: "There is no history to present" });
+    }
   },
 };
 

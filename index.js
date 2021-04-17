@@ -15,6 +15,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(`${BASE_PATH}/`, routes);
 
+app.all("/", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
   sqlLiteManager.connect();
