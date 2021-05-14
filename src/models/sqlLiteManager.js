@@ -71,7 +71,7 @@ const sqlLiteManager = {
     );
 
     // close the database connection
-    db.close();
+    // db.close();
   },
 
   upload: async (
@@ -103,21 +103,8 @@ const sqlLiteManager = {
     );
 
     // close the database connection
-    db.close();
-  },
-
-  update: () => {
-    //TODO
-    let data = ["Ansi C", "C"];
-    let sql = `UPDATE langs
-            SET name = ?
-            WHERE name = ?`;
-    db.run(sql, data, function (err) {
-      if (err) {
-        return console.error(err.message);
-      }
-      console.log(`Row(s) updated: ${this.changes}`);
-    });
+    //db.close();
+    return true;
   },
 
   create: () => {

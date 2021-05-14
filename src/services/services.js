@@ -42,6 +42,7 @@ const publicMethods = {
     let fullNameOfChild = req.body.fullNameOfChild;
     let dateUpload = req.body.dateUpload;
     if (userId && filePath && dateUpload) {
+      bbResult = "תקין";
       let getMedia = await sqlLiteManager.upload(
         userId,
         filePath,
@@ -51,7 +52,6 @@ const publicMethods = {
         fullNameOfChild,
         dateUpload
       );
-      console.log(getMedia);
       res.json({ message: "The Draw was upload" });
     }
   },
